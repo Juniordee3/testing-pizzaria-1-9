@@ -48,9 +48,9 @@ export default function Home() {
                 </div>
             </aside>
 
-            <div className="bg-greyAccent p-10 min-h-[300px] flex justify-center items-center">
+            <div className="bg-greyAccent p-10">
 
-                <div id="output" className="divide-dashed divide-y-2 divide-accent text-4xl">
+                <div id="output" className="divide-dashed divide-y-2 divide-accent">
 
                     <OrdersReport setAppState={setAppState} appState={appState} />
 
