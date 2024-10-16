@@ -42,7 +42,7 @@ async function getJSONData(retrieveScript:string, caching:boolean = true, debug:
         const response:Response = await fetch(retrieveScript, { cache: (caching ? 'force-cache' : 'no-store') });
         const data:any = await response.json();
         // pause for one second if in debugging mode to simulate slow response
-        if (debug) await new Promise(resolve => setTimeout(resolve, 4000));
+        if (debug) await new Promise(resolve => setTimeout(resolve, 1000));
         return data;
     } catch (error:any) {
         console.log(`>>> FETCH ERROR: ${error.message}`);
