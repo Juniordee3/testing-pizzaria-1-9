@@ -5,7 +5,9 @@ import {useEffect, useState} from "react";
 import {PuffLoader} from "react-spinners";
 
 import { getJSONData } from '@/tools/Toolkit';
-import { Orders, Order } from '@/tools/orders.model';
+import { Orders, OrderDetails } from '@/tools/orders.model';
+
+import OrderInfo from './OrderInfo';
 
 export default function OrdersReport({setAppState, appState}:{setAppState:Function, appState:number}) {
     // retrieve server sided script
@@ -31,7 +33,7 @@ export default function OrdersReport({setAppState, appState}:{setAppState:Functi
     }, [appState]);
 
     // ------------------------- state variables
-    const [orders, setOrders] = useState<Order[]>([]);
+    const [orders, setOrders] = useState<OrderDetails[]>([]);
 
     if (appState == 1) {
 
@@ -42,8 +44,9 @@ export default function OrdersReport({setAppState, appState}:{setAppState:Functi
         return (
             <>
                 <div className={"flex items-center gap-5"}>
-                    <PuffLoader color={"#000000"} size={80} />
-                    <span>Loading...</span>
+                    {/*<PuffLoader color={"#000000"} size={20} />*/}
+                    <i className="fas fa-pizza-slice fa-spin"></i>
+                    <span> Loading...</span>
                 </div>
             </>
         )
@@ -51,7 +54,24 @@ export default function OrdersReport({setAppState, appState}:{setAppState:Functi
     } else {
         return (
             <>
-                !!! render out orders content here !!!
+                <div>
+                    <div className="divide-dashed divide-y-2 divide-accent">
+                        {orders.map(
+                            (orderData: OrderDetails, i: number) =>
+                                <OrderInfo
+                                    key={i}
+                                    id={orderData.id}
+                                    name={orderData.name}
+                                    address={orderData.address}
+                                    city={orderData.city}
+                                    size={orderData.size}
+                                    delivered={orderData.delivered}
+                                    toppings={orderData.toppings}
+                                    notes={orderData.notes}
+                                />
+                        )}
+                    </div>
+                </div>
             </>
         );
     }
